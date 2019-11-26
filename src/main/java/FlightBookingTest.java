@@ -1,4 +1,5 @@
 import com.sun.javafx.PlatformUtil;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -8,11 +9,15 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import utility.CoreUtils;
+
 import java.util.List;
 
-public class FlightBookingTest {
+public class FlightBookingTest extends CoreUtils {
 
-    WebDriver driver = new ChromeDriver();
+    
+
+	WebDriver driver = new ChromeDriver();
 
 
     @Test
