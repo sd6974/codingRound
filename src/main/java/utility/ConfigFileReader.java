@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigFileReader {
-	private Properties properties;
+	public Properties properties;
 	private final String propertyFilePath = "C:\\Users\\sougata\\Documents\\GitHub\\codingRound\\GlobalSettings.properties";
 
 	public ConfigFileReader() {
