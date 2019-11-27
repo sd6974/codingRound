@@ -1,1 +1,15 @@
 1.property file added for storing urls in Global settings.properties.
+2.Driver factory
+3.Config file reader
+4.Core utils
+
+
+##changes
+1.HotelBookingTest
+needed to initialize page factory
+
+2.SignInTest
+Switch to frame
+
+3.FlightBooking
+enter down keys
