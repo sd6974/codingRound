@@ -13,7 +13,7 @@ public class CoreUtils extends ConfigFileReader {
 
 	ConfigFileReader config = new ConfigFileReader();
 
-	WebDriver getDriver = DriverFactory.getBrowser("Browser");
+	WebDriver getDriver = DriverFactory.getBrowser("Chrome");
 
 	public WebElement find_element_xpath(String xpath) {
 
@@ -24,6 +24,14 @@ public class CoreUtils extends ConfigFileReader {
 	public WebElement find_element_id(String id) {
 
 		return getDriver.findElement(By.id(id));
+
+	}
+	
+	
+	
+	public WebElement find_element_linkText(String link) {
+
+		return getDriver.findElement(By.linkText(link));
 
 	}
 
@@ -57,6 +65,8 @@ public class CoreUtils extends ConfigFileReader {
 	}
 
 	public void launch_url() {
+		System.out.println("URL:"
+				+ config.properties.getProperty("FlightBookingURL"));
 		getDriver.get(config.properties.getProperty("FlightBookingURL"));
 	}
 
@@ -66,16 +76,35 @@ public class CoreUtils extends ConfigFileReader {
 
 	}
 
+	public void window_maximize() {
+		getDriver.manage().window().maximize();
+	}
+
 	public List<WebElement> find_elements_xpath(String xpath) {
 
 		return getDriver.findElements(By.xpath(xpath));
 
 	}
 
-	public List<WebElement> find_elements_tagName(String id,String tag) {
+	public List<WebElement> find_elements_tagName(String id, String tag) {
 
-		return getDriver.findElement(By.id(id)).findElements(By.tagName("li"));
+		return getDriver.findElement(By.id(id)).findElements(By.tagName(tag));
 
 	}
 
+	public List<WebElement> find_elements_tagName_xpath(String xpath, String tag) {
+
+		return getDriver.findElement(By.xpath(xpath)).findElements(
+				By.tagName(tag));
+
+	}
+
+	public void quitDriver() {
+		getDriver.quit();
+
+	}
+	
+	public void switch_to_frame(String frameId){
+		getDriver.switchTo().frame(frameId);
+	}
 }

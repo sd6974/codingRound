@@ -1,6 +1,7 @@
 import com.sun.javafx.PlatformUtil;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,9 +30,9 @@ public class FlightBookingTest extends CoreUtils {
 
         //setDriverPath();
         launch_url();
-         DriverFactory.closeAllDriver();
+         
          waitFor(2000);
-        
+         window_maximize();
         find_element_id("OneWay").click();
 
       
@@ -41,12 +42,16 @@ public class FlightBookingTest extends CoreUtils {
         //wait for the auto complete options to appear for the origin
 
         waitFor(2000);
-        find_elements_tagName("ui-id-1","li").get(0).click();
+        System.out.println("SIZE::"+find_elements_tagName_xpath("//*[@id='ui-id-1']","li").size());
+        find_element_id("FromTag").sendKeys(Keys.DOWN);
+        //find_elements_tagName("ui-id-1","li").get(0).click();
+        find_elements_tagName_xpath("//*[@id='ui-id-1']","li").get(0).click();
+        find_elements_tagName_xpath("//*[@id='ui-id-1']","li").size();// find_elements_tagName("ui-id-1","li").get(0).click();
        // List<WebElement> originOptions = driver.findElement(By.id("ui-id-1")).findElements(By.tagName("li"));
         //originOptions.get(0).click();
         
-        find_element_id("toTag").clear();
-        find_element_id("toTag").sendKeys("Delhi");
+        find_element_id("ToTag").clear();
+        find_element_id("ToTag").sendKeys("Delhi");
 
        // driver.findElement(By.id("toTag")).clear();
         //driver.findElement(By.id("toTag")).sendKeys("Delhi");
@@ -57,22 +62,31 @@ public class FlightBookingTest extends CoreUtils {
         //select the first item from the destination auto complete list
        // List<WebElement> destinationOptions = driver.findElement(By.id("ui-id-2")).findElements(By.tagName("li"));
         //destinationOptions.get(0).click();
-        find_elements_tagName("ui-id-2","li").get(0).click();
+        waitFor(2000);
+        System.out.println("SIZE::"+find_elements_tagName_xpath("//*[@id='ui-id-2']","li").size());
+        find_element_id("ToTag").sendKeys(Keys.DOWN);
+        
+        find_elements_tagName_xpath("//*[@id='ui-id-2']","li").get(0).click();
+        
+        
 
       //  driver.findElement(By.xpath("//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[3]/td[7]/a")).click();
-        find_element_xpath("//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[3]/td[7]/a").click();
+       // find_element_xpath("//*[@id='ui-datepicker-div']/div[1]/table/tbody/tr[3]/td[7]/a").click();
+        find_element_id("DepartDate").click();
+        find_element_id("DepartDate").sendKeys("27/11/2019");
+        find_element_id("DepartDate").sendKeys(Keys.TAB);
 
         //all fields filled in. Now click on search
         //driver.findElement(By.id("SearchBtn")).click();
         find_element_id("SearchBtn").click();
-        waitFor(5000);
+        waitFor(9000);
         //verify that result appears for the provided journey search
         Assert.assertTrue(isElementPresent(By.className("searchSummary")));
 
         //close the browser
          
-        
-        
+        DriverFactory.closeAllDriver();
+        quitDriver();
 
     }
 

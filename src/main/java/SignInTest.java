@@ -1,33 +1,38 @@
-import com.sun.javafx.PlatformUtil;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class SignInTest {
+import utility.CoreUtils;
 
-    WebDriver driver = new ChromeDriver();
+public class SignInTest extends CoreUtils {
+
+    
 
     @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
 
-        setDriverPath();
+       
 
-        driver.get("https://www.cleartrip.com/");
+    	launch_url();
         waitFor(2000);
-
-        driver.findElement(By.linkText("Your trips")).click();
-        driver.findElement(By.id("SignIn")).click();
-
-        driver.findElement(By.id("signInButton")).click();
-
-        String errors1 = driver.findElement(By.id("errors1")).getText();
+        find_element_linkText("Your trips").click();
+        find_element_id("SignIn").click();
+        
+        waitFor(6000);
+      
+        switch_to_frame("modal_window");
+        find_element_id("signInButton").click();
+        
+        waitFor(5000);
+        String errors1 = find_element_id("errors1").getText();
         Assert.assertTrue(errors1.contains("There were errors in your submission"));
-        driver.quit();
+        quitDriver();
     }
 
-    private void waitFor(int durationInMilliSeconds) {
+   /* private void waitFor(int durationInMilliSeconds) {
         try {
             Thread.sleep(durationInMilliSeconds);
         } catch (InterruptedException e) {
@@ -46,6 +51,6 @@ public class SignInTest {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
         }
     }
-
+*/
 
 }
